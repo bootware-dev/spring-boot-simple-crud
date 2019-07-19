@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head('登録', ~{::link})"></head>
+<body>
+<div th:replace="login::header"></div>
+<div class="uk-container uk-container-xsmall">
+    <div class="uk-align-center">
+        <form th:action="@{/signup}" th:object="${signupForm}" method="post">
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input class="uk-input" name="username" type="text" placeholder="希望するユーザーID" th:value="${signupForm.getUsername()}">
+                </div>
+                <div class="uk-text-meta">大小英数（アンダースコア、ハイフンを含む）3〜32文字で入力してください。</div>
+                <em th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon" uk-icon="icon: mail"></span>
+                    <input class="uk-input" name="mailAddress" type="text" placeholder="メールアドレス" th:value="${signupForm.getMailAddress()}">
+                </div>
+                <div class="uk-text-meta">xxxxx@yyyyyの形式で入力してください。</div>
+                <em th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" />
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon" uk-icon="icon: lock"></span>
+                    <input class="uk-input" name="password1" type="password" placeholder="任意のパスワード" th:value="${signupForm.getPassword1()}">
+                </div>
+                <div class="uk-text-meta">大小英数（アンダースコア、ハイフンを含む）3〜32文字で入力してください。</div>
+                <em th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" />
+                <em th:if="${#fields.hasErrors('validPassword')}" th:errors="*{validPassword}" />
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon" uk-icon="icon: lock"></span>
+                    <input class="uk-input" name="password2" type="password" placeholder="パスワード確認用" th:value="${signupForm.getPassword2()}">
+                </div>
+                <div class="uk-text-meta">上記パスワードをコピーせず、もう一度入力してください。</div>
+                <em th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}"/>
+                <em th:if="${#fields.hasErrors('validPassword')}" th:errors="*{validPassword}" />
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: pencil"></span>
+                    <input class="uk-input" name="lastName" type="text" placeholder="苗字" th:value="${signupForm.getLastName()}">
+                </div>
+                <div class="uk-text-meta">1~32文字で入力してください。</div>
+                <em th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" />
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: pencil"></span>
+                    <input class="uk-input" name="firstName" type="text" placeholder="名前" th:value="${signupForm.getFirstName()}">
+                </div>
+                <div class="uk-text-meta">1~32文字で入力してください。</div>
+                <em th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" />
+            </div>
+            <div class="uk-margin">
+                <label>
+                    <input th:if="${signupForm.isAdmin()}" class="uk-checkbox" name="admin" type="checkbox" checked="checked">
+                    <input th:if="${!signupForm.isAdmin()}" class="uk-checkbox" name="admin" type="checkbox"> 管理者権限
+                </label>
+                <div class="uk-text-meta">チェックをつけると管理者権限を付与することができます。</div>
+            </div>
+            <div class="uk-margin">
+                <button class="uk-button uk-button-default" type="submit">登録</button>
+            </div>
+            <div class="uk-margin">
+                <a href="/">ログイン</a>
+            </div>
+            <div class="uk-margin uk-text-danger">
+                <div th:if="${signupError}">登録に失敗しました。</div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="layout::footer"></div>
+</body>
+</html>

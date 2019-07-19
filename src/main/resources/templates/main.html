@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head('トップ', ~{::link})"></head>
+<body>
+<header th:fragment="header">
+    <nav class="uk-navbar-container uk-background-secondary" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="/">Spring Boot Simple CRUD</a>
+        </div>
+    </nav>
+</header>
+<div class="uk-container uk-container-xsmall">
+    <article class="uk-article">
+        <h1 class="uk-article-title uk-padding-small uk-padding-remove-left uk-padding-remove-bottom">ユーザー情報</h1>
+        <div class="uk-margin uk-card uk-card-default uk-card-small">
+            <div class="uk-text-left uk-card-body">
+                <h2 class="uk-heading-divider">プロフィール</h2>
+                <div class="uk-margin uk-align-right">
+                    <span class="uk-label uk-label-success" th:if="${admin}">Administrator</span>
+                    <span class="uk-label uk-label">User</span>
+                </div>
+                <div class="uk-margin">
+                    <img th:src="${avatarUrl}" width="75" height="75">
+                    <span class="uk-text-middle uk-text-large uk-margin-left" th:text="${username}" />
+                </div>
+                <div class="uk-margin">
+                    <span class="uk-article-meta">作成日:
+                        <span th:text="${createdAt.toLocalDate()}" />
+                    </span>
+                    <span class="uk-article-meta uk-margin-small-left" th:if="${modifiedAt != null}">最終更新日:
+                        <span th:text="${modifiedAt.toLocalDate()}" />
+                    </span>
+                </div>
+                <form th:action="@{/update}" th:object="${updateForm}" method="post">
+                    <table class="uk-table">
+                        <tbodyd>
+                        <tr>
+                            <td >メールアドレス</td>
+                            <td th:text="${mailAddress}"></td>
+                            <td>
+                                <input class="uk-input" name="newMailAddress" type="text" placeholder="新しいメールアドレス">
+                                <div class="uk-text-meta">新しいメールアドレスを設定してください。</div>
+                                <em th:if="${#fields.hasErrors('newMailAddress')}" th:errors="*{newMailAddress}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>苗字</td>
+                            <td th:text="${lastName}"></td>
+                            <td>
+                                <input class="uk-input" name="newLastName" type="text" placeholder="新しい苗字">
+                                <div class="uk-text-meta">新しい苗字を設定してください。</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >名前</td>
+                            <td th:text="${firstName}"></td>
+                            <td>
+                                <input class="uk-input" name="newFirstName" type="text" placeholder="新しい名前">
+                                <div class="uk-text-meta">新しい名前を設定してください。</div>
+                            </td>
+                        </tr>
+                        </tbodyd>
+                    </table>
+                    <button class="uk-button uk-button-default uk-margin-small-right uk-align-right" type="submit">修正</button>
+                </form>
+            </div>
+        </div>
+        <div class="uk-margin uk-card uk-card-default uk-card-small" th:if="${admin == true}">
+            <div class="uk-text-left uk-card-body">
+                <h2 class="uk-heading-divider">ユーザーリスト</h2>
+                <div class="uk-text-meta">利用可能</div>
+                <div class="uk-margin">
+                    <span class="uk-label uk-label-success">Administrator</span>
+                </div>
+                <form th:action="@{/update}" th:object="${updateForm}" method="post">
+                    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+                        <thead>
+                            <tr>
+                                <th>ユーザー名</th>
+                                <th>メールアドレス</th>
+                                <th>苗字</th>
+                                <th>名前</th>
+                                <th>管理者権限</th>
+                            </tr>
+                        </thead>
+                        <tbodyd>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.getUsername()}"></td>
+                                <td th:text="${user.getMailAddress()}"></td>
+                                <td th:text="${user.getLastName()}"></td>
+                                <td th:text="${user.getFirstName()}"></td>
+                                <td th:text="${user.isAdmin() ? '◯' : '×'}"></td>
+                            </tr>
+                        </tbodyd>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <form method="post" th:action="@{/logout}">
+            <div class="uk-margin">
+                <button class="uk-button uk-button-default" type="submit">ログアウト</button>　
+                <button class="uk-button uk-button-danger uk-align-right" type="button" uk-toggle="target: #modal-example">アカウントの削除</button>
+            </div>
+        </form>
+
+        <div id="modal-example" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <form method="post" th:action="@{/delete}">
+                    <h2 class="uk-modal-title">アカウントの削除</h2>
+                    <p>アカウントを削除します。よろしいですか？</p>
+                    <p class="uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">キャンセル</button>
+                        <button class="uk-button uk-button-primary" type="submit">続行</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </article>
+</div>
+<div th:replace="layout::footer"></div>
+</body>

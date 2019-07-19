@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head('ログイン', ~{::link})"></head>
+<body>
+<header th:fragment="header">
+    <nav class="uk-navbar-container uk-background-secondary" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="/">Spring Boot Simple CRUD</a>
+        </div>
+    </nav>
+</header>
+<div class="uk-container uk-container-xsmall">
+    <div class="uk-align-center">
+        <form th:action="@{/signin}" method="post">
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input class="uk-input" name="username" type="text" placeholder="ユーザー名">
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon" uk-icon="icon: lock"></span>
+                    <input class="uk-input" name="password" type="password" placeholder="パスワード">
+                </div>
+            </div>
+            <div class="uk-margin">
+                <button class="uk-button uk-button-default" type="submit">ログイン</button>
+            </div>
+            <div class="uk-margin">
+                <a href="/signup">アカウント登録</a>
+            </div>
+            <div class="uk-margin uk-text-danger">
+                <em th:if="${param.logout}">ログアウトしました。</em>
+                <em th:if="${param.error}">ログインに失敗しました。</em>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="layout::footer"></div>
+</body>
+</html>

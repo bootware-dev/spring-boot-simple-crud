@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title, links)">
+    <title th:text="${title == null} ? 'Spring Boot Simple CRUD' : ${title} + ' | Spring Boot Simple CRUD'">Spring Boot Simple CRUD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script>
+</head>
+<footer th:fragment="footer">
+    <hr/>
+    <div class="uk-container-xsmall uk-align-center uk-padding-small uk-padding-remove-bottom">
+        <h6 class="uk-text-middle">© 2019 Powered by <a href="https://purimon.xyz">purimon.xyz</a></h6>
+    </div>
+</footer>
+</html>

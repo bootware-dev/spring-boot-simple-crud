@@ -14,7 +14,7 @@ public class UpdateForm {
 
     private String newLastName;
 
-    @Email(groups = Group1.class)
+    @Email(groups = Group1.class, message = "メールアドレスの形式が正しくありません。")
     private String newMailAddress;
 
 }

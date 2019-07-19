@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="layout::head('トップ', ~{::link})"></head>
+<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head('トップ')"></head>
 <body>
 <header th:fragment="header">
     <nav class="uk-navbar-container uk-background-secondary" uk-navbar>
@@ -39,7 +39,7 @@
                             <td th:text="${mailAddress}"></td>
                             <td>
                                 <input class="uk-input" name="newMailAddress" type="text" placeholder="新しいメールアドレス">
-                                <div class="uk-text-meta">新しいメールアドレスを設定してください。</div>
+                                <div class="uk-text-meta">新しいメールアドレスを入力してください。</div>
                                 <em th:if="${#fields.hasErrors('newMailAddress')}" th:errors="*{newMailAddress}" />
                             </td>
                         </tr>
@@ -48,7 +48,7 @@
                             <td th:text="${lastName}"></td>
                             <td>
                                 <input class="uk-input" name="newLastName" type="text" placeholder="新しい苗字">
-                                <div class="uk-text-meta">新しい苗字を設定してください。</div>
+                                <div class="uk-text-meta">新しい苗字を入力してください。</div>
                             </td>
                         </tr>
                         <tr>
@@ -56,7 +56,7 @@
                             <td th:text="${firstName}"></td>
                             <td>
                                 <input class="uk-input" name="newFirstName" type="text" placeholder="新しい名前">
-                                <div class="uk-text-meta">新しい名前を設定してください。</div>
+                                <div class="uk-text-meta">新しい名前を入力してください。</div>
                             </td>
                         </tr>
                         </tbodyd>

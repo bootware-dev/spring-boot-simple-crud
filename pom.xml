@@ -10,7 +10,7 @@
     </parent>
     <groupId>xyz.purimon</groupId>
     <artifactId>spring-boot-simple-crud</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1-RELEASE</version>
     <name>Spring Boot Simple CRUD</name>
     <description>Spring boot simple CRUD.</description>
 

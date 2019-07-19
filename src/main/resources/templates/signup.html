@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="layout::head('登録', ~{::link})"></head>
+<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head('登録')"></head>
 <body>
 <div th:replace="login::header"></div>
 <div class="uk-container uk-container-xsmall">
@@ -9,7 +9,7 @@
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input" name="username" type="text" placeholder="希望するユーザーID" th:value="${signupForm.getUsername()}">
+                    <input class="uk-input" name="username" type="text" placeholder="希望するユーザー名" th:value="${signupForm.getUsername()}">
                 </div>
                 <div class="uk-text-meta">大小英数（アンダースコア、ハイフンを含む）3〜32文字で入力してください。</div>
                 <em th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
